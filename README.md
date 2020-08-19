@@ -1,2 +1,2 @@
 # LogisticRegression
-A simple logistic regression program using python and NumPy to classify four inputs as a backslash or not
+A logistic regression program using python and NumPy to classify four inputs as a backslash or not

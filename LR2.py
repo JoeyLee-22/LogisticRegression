@@ -7,9 +7,9 @@ from array import array
 class NeuralNetwork():
 
     width = 35
-    numNewSituation = 0
+    numNewSituation = 10
     learning_rate = 0.1
-    epochs = 25000
+    epochs = 10000
     sizeOfEpoch = 5
 
     def __init__(self, size):
@@ -17,21 +17,8 @@ class NeuralNetwork():
 
         self.output = np.empty(size[1])
 
-        if os.path.getsize("weights_file") == 0:
-            self.weights = np.random.rand(size[0])
-            self.bias = np.random.rand(1)
-        else:
-            weights_file = open(r"weights_file", "rb")
-            weights_array = array('f')
-            weights_array.fromstring(weights_file.read())
-            weights_file.close
-            bias_file = open(r"bias_file", "rb")
-            bias_array = array('f')
-            bias_array.fromstring(bias_file.read())
-            bias_file.close
-
-            self.weights = weights_array.tolist()
-            self.bias = bias_array.tolist()
+        self.weights = np.random.rand(size[0])
+        self.bias = np.random.rand(1)
 
         self.weights_summation = np.zeros(size[0])      
         self.bias_summation = np.zeros(size[1])
@@ -63,11 +50,11 @@ class NeuralNetwork():
             self.error = np.subtract(self.output, training_outputs[m])
             self.backProp(training_inputs[m])
 
-            print("Error: ", round(np.absolute(self.error[0]), 6), end="\r")
+            print("Error: ", round(np.absolute(self.error[0]), 6))
         self.change()
         self.weights_summation = np.zeros(self.dimensions[0])
         self.bias_summation = np.zeros(1)
-        print ("Error: ", round(np.absolute(self.error[0]), 6), end="\r")
+        print ("Error: ", round(np.absolute(self.error[0]), 6))
 
 if __name__ == "__main__":                
     neural_network = NeuralNetwork([4,1])
@@ -108,12 +95,12 @@ if __name__ == "__main__":
         else:
             print("Result: Not Back Slash")
 
-    weights_file = open(r"weights_file", "wb")
-    weights_array = array('f', neural_network.weights)
-    weights_array.tofile(weights_file)
-    weights_file.close
+    # weights_file = open(r"weights_file", "wb")
+    # weights_array = array('f', neural_network.weights)
+    # weights_array.tofile(weights_file)
+    # weights_file.close
 
-    bias_file = open(r"bias_file", "wb")
-    bias_array = array('f', neural_network.bias)
-    bias_array.tofile(bias_file)
-    bias_file.close
+    # bias_file = open(r"bias_file", "wb")
+    # bias_array = array('f', neural_network.bias)
+    # bias_array.tofile(bias_file)
+    # bias_file.close
